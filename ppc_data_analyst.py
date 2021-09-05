@@ -144,15 +144,12 @@ for i in range(1,len(L2max_categories)):
     print(i)
     comb_L2 += combinations(L2max_categories, i)
 comb_L2 = [i for i in comb_L2]
-
-
 l2_dictionaty = {}
 for j in L2max_categories:    
     l2_dictionaty[j] = my_data[j].unique()  
 data_1 = pd.DataFrame()
 
 for j in comb_L2:
-    
     print(j)
     print(len(j))
     l2_mi = data_L2_max1
@@ -169,30 +166,23 @@ for j in comb_L2:
 
 
 
-
-
-
 data_L2_max = my_new_data.where(my_new_data[sorted_by_max[0][2]] == sorted_by_max[0][4]).dropna()
-
 first = data_L2_max.where(data_L2_max['network'] == 'g').dropna()
 second = data_L2_max.where(data_L2_max['Gdevice'] == 'm').dropna()
 (max_row, max_col) = first.shape
 second = second.where(data_L2_max['network'] == 'g').dropna()
-
 third = data_L2_max.where(data_L2_max['Gdevice'] == 'c').dropna()
 third = third.where(data_L2_max['network'] == 'g').dropna()
-
 four = data_L2_max.where(data_L2_max['UtmCreative'] == 'https://www.fortrader.com/').dropna()
 four = four.where(data_L2_max['network'] == 'g').dropna()
-
 writer = pd.ExcelWriter('L2FTD_Table.xlsx', engine='xlsxwriter')
 second.to_excel(writer, sheet_name='Sheet1', startrow = 1, header=False, index=False)
-workbook = writer.book
-worksheet = writer.sheets['Sheet1']
-column_settings = [{'header': column} for column in second.columns]
-worksheet.add_table(0, 0, max_row, max_col - 1, {'columns': column_settings})
-worksheet.set_column(0, max_col - 1, 12)
-writer.save()
+#workbook = writer.book
+#worksheet = writer.sheets['Sheet1']
+#column_settings = [{'header': column} for column in second.columns]
+#worksheet.add_table(0, 0, max_row, max_col - 1, {'columns': column_settings})
+#worksheet.set_column(0, max_col - 1, 12)
+#writer.save()
 
 writer = pd.ExcelWriter('Max_L2FTD.xlsx', engine='xlsxwriter')
 first.to_excel(writer, sheet_name='report_1')
@@ -203,16 +193,12 @@ writer.save()
 
 
       
-        
-        
-        with open(path_file, 'a+') as f:
-            df.to_excel(f, header=f.tell() == 0, encoding='utf-8', index=False)
-
+with open(path_file, 'a+') as f:
+    df.to_excel(f, header=f.tell() == 0, encoding='utf-8', index=False)
+    
 def append_df(path_file, df):
     with open(path_file, 'a+') as f:
         df.to_excel(f, header=f.tell() == 0, encoding='utf-8', index=False)
-
-
 
 len([i for i in my_data['Gdevice'] if i == 'c'])
 len([i for i in my_data['Gdevice'] if i == 't'])
@@ -245,41 +231,9 @@ for j in comb:
         for unique_name in unique_ids:
             m = mi.where(mi[i] == unique_name).dropna()
             check_ptd(m, i, j, unique_name)
-#            print(p.count())
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-mq = pd.concat([my_new_data['FTD 0/1'], my_new_data['Gdevice','Call Center (Conversion Owner) (User)','UtmCreative']],axis=1)      
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+#            print(p.count())    
+       
+mq = pd.concat([my_new_data['FTD 0/1'], my_new_data['Gdevice','Call Center (Conversion Owner) (User)','UtmCreative']],axis=1)            
 perm = [permutations(my_new_categories, i) for i in range(len(my_new_categories))]
 for i in list(perm):
     print (next(i))
